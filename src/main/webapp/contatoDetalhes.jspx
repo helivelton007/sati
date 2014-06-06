@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<img width="50" height="40" src="imagens\voltar.jpg" />
+		<a href="contato.jsf">Cancelar</a>
+		<p:dialog footer="SATI Tecnologia" showEffect="slide"
+			hideEffect="bounce" visible="true">
+			<p:fieldset legend="Edição de Contato">
+				<!--DadosPessoais-->
+				<p:tabView id="tbContato">
+					<!-- 			DADOS PESSOAIS -->
+					<p:tab title="Dados Pessoais">
+						<h:panelGrid columns="2">
+							<p:outputLabel for="nome" value="Nome:" />
+							<p:inputText id="nome" value="#{ContatoControl.contato.nome}"
+								size="70" required="true"
+								requiredMessage="É necessário informar o nome!" />
+							<p:outputLabel for="telefone" value="Telefone Residencial: " />
+							<p:inputMask id="telefone"
+								value="#{ContatoControl.contato.telefone}" required="true"
+								requiredMessage="É necessário informar o telefone!"
+								mask="(99)9999-9999" />
+						</h:panelGrid>
+					</p:tab>
+				</p:tabView>
+				<p:commandButton value="Confirmar"
+					actionListener="#{ContatoControl.confirmar}" icon="ui-icon-check"
+					title="Salvar Contato" />
+			</p:fieldset>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

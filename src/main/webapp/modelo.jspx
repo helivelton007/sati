@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:dataTable id="dtModelo" var="modelo"
+			value="#{ModeloControl.modelos}"
+			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
+			<f:facet name="header">
+						Cadastro de Modelos
+						<p:separator />
+				<p:outputLabel value="Descrição " />
+				<p:inputText id="inputFiltroGlobal"
+					value="#{ModeloControl.filtroGlobal}" />
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
+					actionListener="#{ModeloControl.listar}" update="dtModelo" />
+				<p:commandButton value="Novo Modelo" title="Novo Modelo"
+					actionListener="#{ModeloControl.preparaIncluir}" ajax="false" />
+				<p:commandButton value="Voltar" title="Voltar"
+					actionListener="#{ModeloControl.voltarHome}" ajax="false" />
+				<p:focus for="inputFiltroGlobal" />
+				<p:defaultCommand target="cmdFiltroGlobal" />
+			</f:facet>
+			<p:column headerText="Nome">
+				<h:outputText value="#{modelo.nome}" />
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-pencil" title="Alterar Modelo"
+					actionListener="#{ModeloControl.preparaAlterar}" ajax="false">
+					<f:attribute name="modelo" value="#{modelo}" />
+				</p:commandButton>
+			</p:column>
+			<p:column headerText="Excluir">
+				<p:commandButton icon="ui-icon-closethick" title="Remover Modelo"
+					actionListener="#{ModeloControl.excluir}" ajax="false">
+					<f:attribute name="modelo" value="#{modelo}" />
+				</p:commandButton>
+			</p:column>
+			<f:facet name="footer">
+				<p:outputLabel value="# Registro(s)" />
+			</f:facet>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>

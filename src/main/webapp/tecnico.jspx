@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:dataTable id="dtTecnico" var="tecnico"
+			value="#{TecnicoControl.tecnicos}"
+			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
+			<f:facet name="header">
+						Cadastro de Técnicos
+						<p:separator />
+				<p:outputLabel value="Nome: " />
+				<p:inputText id="inputFiltroGlobal"
+					value="#{TecnicoControl.filtroGlobal}" />
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
+					actionListener="#{TecnicoControl.listar}" update="dtTecnico" />
+				<p:commandButton value="Novo Técnico" title="Novo Técnico"
+					actionListener="#{TecnicoControl.preparaIncluir}" ajax="false" />
+				<p:commandButton value="Voltar" title="Voltar"
+					actionListener="#{TecnicoControl.voltarHome}" ajax="false" />
+				<p:focus for="inputFiltroGlobal" />
+				<p:defaultCommand target="cmdFiltroGlobal" />
+			</f:facet>
+			<p:column headerText="Nome">
+				<h:outputText value="#{tecnico.nome}" />
+			</p:column>
+			<p:column headerText="Apelido">
+				<h:outputText value="#{tecnico.apelido}" />
+			</p:column>
+			<p:column headerText="Telefone">
+				<h:outputText value="#{tecnico.telefone}" />
+			</p:column>
+			<p:column headerText="Telefone2">
+				<h:outputText value="#{tecnico.telefone_dois}" />
+			</p:column>
+			<p:column headerText="Celular">
+				<h:outputText value="#{tecnico.celular}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{tecnico.email}" />
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-pencil" title="Alterar Técnicos"
+					actionListener="#{TecnicoControl.preparaAlterar}" ajax="false">
+					<f:attribute name="tecnico" value="#{tecnico}" />
+				</p:commandButton>
+			</p:column>
+			<p:column headerText="Excluir">
+				<p:commandButton icon="ui-icon-closethick" title="Remover Técnico"
+					actionListener="#{TecnicoControl.excluir}" ajax="false">
+					<f:attribute name="tecnico" value="#{tecnico}" />
+				</p:commandButton>
+			</p:column>
+			<f:facet name="footer">
+				<p:outputLabel value="# Registro(s)" />
+			</f:facet>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
