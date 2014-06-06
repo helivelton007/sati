@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="cabecalho">
+		<style>
+			.ui-autocomplete input {
+			    width:90%;
+			}			
+		</style>
+	</ui:define>
+	
+   
+   <ui:define name="corpo">
+	
+	<p:panel header="Manter Ordem Servico ( #{OrdemServicoControl.ordemServico.id } )" id="OrdemServicoForm">
+	
+		<a:field label="Cliente" width="350px" for="consCliente">
+	               <p:autoComplete id="consCliente" maxResults="10" minQueryLength="3" effect="fade"   
+	                    value="#{OrdemServicoControl.ordemServico.cliente}"   
+	                    var="c" itemLabel="#{c.nome}" itemValue="#{c}" completeMethod="#{OrdemServicoControl.consultarCliente}" forceSelection="true" size="42">
+	                    <f:converter converterId="clienteConverter"/>
+	                    <f:facet name="itemtip">  
+	                       <h:panelGrid  columns="2" cellpadding="10">  
+	                           <h:outputText id="nomeClienteCons" value="#{c.nome }"/>  
+	                           <h:outputText id="cpfCons" value="#{c.cpfCnpj}" />
+	                       </h:panelGrid>  
+	                    </f:facet>  
+	              </p:autoComplete>
+	               <p:tooltip for="consCliente" value="Informe o cliente que solicita o Serviço." showEffect="fade" hideEffect="fade" />  
+	           </a:field>
+	         <a:newLine />
+		        <a:newLine/>
+		        
+            <a:field label="Serviço" width="350px" for="consServico">
+                  <p:autoComplete id="consServico" maxResults="10" minQueryLength="3" effect="fade"   
+                                value="#{OrdemServicoControl.servico}"   
+                                var="ser" itemLabel="#{ser.descricao}" itemValue="#{ser}" completeMethod="#{OrdemServicoControl.consultarServico}" forceSelection="true" size="42">
+                                <f:converter converterId="servicoConverter"/>
+                 </p:autoComplete>
+              </a:field>
+              <a:field spaceLeft="15px">
+              <p:commandButton id="addServico" actionListener="#{OrdemServicoControl.addServico }" value="Add Serviço" update="servicos"  ajax="false" icon="ui-icon-plusthick"/>
+              </a:field>
+              <a:newLine/>           
+             <p:dataTable id="servicos" value="#{OrdemServicoControl.ordemServico.itensServicoList }" var="servAdd" editable="true" width="100%" emptyMessage="Adicione ao menos um Serviço" >
+               <f:facet name="header">
+                  <h:outputText value="Lista de Serviços a serem Realizados"></h:outputText>
+               </f:facet>
+               
+               <p:column sortBy="#{servAdd.servico.descricao }">
+                  <f:facet name="header">
+                     <h:outputText value="Serviço"/>
+                  </f:facet>
+                  <h:outputText value="#{servAdd.servico.descricao }"/>
+               </p:column>  
+               
+               <p:column headerText="Quantidade" sortBy="#{servAdd.quantidade }">
+                  <p:cellEditor>
+                  <f:facet name="output">
+                        <h:outputText value="#{servAdd.quantidade }" />
+                     </f:facet>
+                     <f:facet name="input">
+                        <h:inputText value="#{servAdd.quantidade }"/>
+                     </f:facet>
+                  </p:cellEditor>  
+               </p:column>
+               
+               
+               <p:column>
+                <p:rowEditor />
+               </p:column>
+               
+            </p:dataTable>
+			<a:newLine />
+		        
+		        
+		        
+     <p:commandButton id="btnSalvar" actionListener="#{OrdemServicoControl.confirmar }" value="Salvar" update="OrdemServicoForm, mensagens, growl" ajax="false" icon="ui-icon-disk"/>
+   	 <p:commandButton id="btnConfirmar" onclick="cancelarOS.show();" value="Emitir OS" icon="ui-icon-disk"/>
+     <p:commandButton id="btnListar" action="ordemServicoList" value="Listar" ajax="false" icon="ui-icon-note"/>
+     </p:panel>
+           	<p:confirmDialog message="Verifique os dados informados, após confirmar não será possivel alterar a Ordem de Serviço. Emitir O.S.?" header="Atenção" severity="alert" widgetVar="cancelarOS">
+			<p:commandButton value="Sim" action="#{OrdemServicoControl.confirmar }" update="@form" oncomplete="cancelarOS.hide()" />
+			<p:commandButton value="Não" onclick="cancelarOS.hide();" type="button" />
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

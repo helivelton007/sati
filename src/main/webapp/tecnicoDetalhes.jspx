@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<img width="50" height="40" src="imagens\voltar.jpg" />
+		<a href="tecnico.jsf">Cancelar</a>
+		<p:dialog footer="Gtec Tecnologia" showEffect="slide"
+			hideEffect="bounce" visible="true">
+			<p:fieldset legend="Edição de Tecnico">
+				<!--DadosPessoais-->
+				<p:tabView id="tbTecnico">
+					<!-- 			DADOS PESSOAIS -->
+					<p:tab title="Dados do Técnico">
+						<h:panelGrid columns="2">
+							<p:outputLabel for="nome" value="Nome:" />
+							<p:inputText id="nome" value="#{TecnicoControl.tecnico.nome}"
+								size="50" required="true"
+								requiredMessage="Nome: Campo Obrigátorio!" />
+							<p:outputLabel value="Apelido: *" />
+							<p:inputText value="#{TecnicoControl.tecnico.apelido}" size="30" />
+							<p:outputLabel for="telefone1" value="Telefone (1): " />
+							<p:inputMask id="telefone1"
+								value="#{TecnicoControl.tecnico.telefone}" mask="(99)9999-9999"
+								required="true"
+								requiredMessage="Telefone(1): Campo Obrigátorio!" />
+							<p:outputLabel value="Telefone (2): " />
+							<p:inputMask value="#{TecnicoControl.tecnico.telefone_dois}"
+								mask="(99)9999-9999" />
+							<p:outputLabel for="celular" value="Telefone Celular: " />
+							<p:inputMask id="celular"
+								value="#{TecnicoControl.tecnico.celular}" mask="(99)9999-9999"
+								required="true" requiredMessage="Celular: Campo Obrigátorio!" />
+							<p:outputLabel for="email" value="Email: " />
+							<p:inputText id="email" value="#{TecnicoControl.tecnico.email}"
+								size="50" required="true" requiredMessage="Email: Campo Obrigátorio!" />
+						</h:panelGrid>
+					</p:tab>
+				</p:tabView>
+				<p:commandButton value="Confirmar"
+					actionListener="#{TecnicoControl.confirmar}" icon="ui-icon-check"
+					process="" title="Salvar Técnico" />
+			</p:fieldset>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

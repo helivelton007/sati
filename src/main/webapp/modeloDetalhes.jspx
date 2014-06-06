@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+	<img width="50" height="40" src="imagens\voltar.jpg" />
+		<a href="modelo.jsf">Cancelar</a>
+		<p:dialog footer="Gtec Tecnologia" showEffect="slide"
+			hideEffect="bounce" visible="true">
+			<p:fieldset legend="Edição de Modelo">
+				<!--Descrição-->
+				<p:tabView id="tbModelo">
+					<!-- 			DESCRIÇÃO DO MODELO -->
+					<p:tab title="Descrição">
+						<h:panelGrid columns="1">
+							<p:outputLabel for="nome" value="Nome: " />
+							<p:inputText id="nome" value="#{ModeloControl.modelo.nome}" size="70"
+								required="true" 
+								requiredMessage="Nome: Campo Obrigatório!" />
+						</h:panelGrid>
+					</p:tab>
+				</p:tabView>
+				<p:commandButton value="Confirmar"
+					actionListener="#{ModeloControl.confirmar}" icon="ui-icon-check"
+					process="" title="Salvar Modelo"/>
+			</p:fieldset>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

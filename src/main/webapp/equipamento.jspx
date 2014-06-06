@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<h:form>
+			<p:dataTable id="dtEquipamento" var="equipamento"
+				value="#{EquipamentoControl.equipamentos}"
+				emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
+				<f:facet name="header">
+						Cadastro de Equipamentos
+						<p:separator />
+					<p:outputLabel value="Descrição: " />
+					<p:inputText id="inputFiltroGlobal"
+						value="#{EquipamentoControl.filtroGlobal}" />
+					<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
+						actionListener="#{EquipamentoControl.listar}"
+						update="dtEquipamento" />
+					<p:commandButton value="Novo Equipamento" title="Novo Equipamento"
+						actionListener="#{EquipamentoControl.preparaIncluir}" ajax="false" />
+					<p:commandButton value="Voltar" title="Voltar"
+						actionListener="#{EquipamentoControl.voltarHome}" ajax="false" />
+					<p:focus for="inputFiltroGlobal" />
+					<p:defaultCommand target="cmdFiltroGlobal" />
+				</f:facet>
+				<p:column headerText="Nome">
+					<h:outputText value="#{equipamento.nome}" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton icon="ui-icon-pencil" title="Alterar Contato"
+						actionListener="#{EquipamentoControl.preparaAlterar}" ajax="false">
+						<f:attribute name="equipamento" value="#{equipamento}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Excluir">
+					<p:commandButton icon="ui-icon-closethick" title="Remover Cliente"
+						actionListener="#{EquipamentoControl.excluir}" ajax="false">
+						<f:attribute name="equipamento" value="#{equipamento}" />
+					</p:commandButton>
+				</p:column>
+				<f:facet name="footer">
+					<p:outputLabel value="# Registro(s)" />
+				</f:facet>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
