@@ -21,7 +21,7 @@ import javax.persistence.Transient;
 
 @Entity
 public class ItemEquipamento {
-
+	// comentario
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "geradorItemEquipamento")
 	@SequenceGenerator(name = "geradorItemEquipamento", sequenceName = "gerador_item_equipamento", allocationSize = 1, initialValue = 1)
