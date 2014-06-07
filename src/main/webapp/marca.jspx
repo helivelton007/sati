@@ -10,7 +10,7 @@
 		<p:dataTable id="dtMarca" var="marca" value="#{MarcaControl.marcas}"
 			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
 			<f:facet name="header">
-						Cadastro de Marcas
+						
 						<p:separator />
 				<p:outputLabel value="Descrição " />
 				<p:inputText id="inputFiltroGlobal"
