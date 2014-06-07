@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -21,6 +22,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
+
+import br.com.ambientinformatica.corporativo.entidade.Cep;
 
 
 @Entity
@@ -37,6 +40,15 @@ public class Cliente {
 	private String email;
 	private String endereco;
 	private String cidade;
+	
+	@ManyToOne
+	private Cep cep;
+	
+	
+	public void setCep(Cep cep) {
+		this.cep = cep;
+	}
+
 	public String getCelular() {
 		return celular;
 	}

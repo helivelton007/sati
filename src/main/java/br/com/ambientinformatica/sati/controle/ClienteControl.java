@@ -14,8 +14,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.corporativo.entidade.Cep;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.sati.entidade.Cliente;
+import br.com.ambientinformatica.sati.persistencia.CepDao;
 import br.com.ambientinformatica.sati.persistencia.ClienteDao;
 import br.com.ambientinformatica.sati.util.SatiException;
 
@@ -30,7 +32,7 @@ public class ClienteControl {
 	private ClienteDao clienteDao;
 	private String filtroGlobal = "";
 	private List<Cliente> clientes = new ArrayList<Cliente>();
-	
+	private String cepString;
 
    @PostConstruct
    public void init(){
@@ -128,6 +130,18 @@ public class ClienteControl {
 			}
 		}
 	}
+	public void consultarCep(ActionEvent evento) throws Exception {
+		CepDao cepDao = new CepDao();
+		Cep cep = new Cep();
+		try {
+			cep = cepDao.consultar(cepString);
+			cliente.setCep(cep);
+		}catch(NullPointerException npe){
+			cep = new Cep();
+		} catch (IOException e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -148,5 +162,14 @@ public class ClienteControl {
 	public void setFiltroGlobal(String filtroGlobal) {
 		this.filtroGlobal = filtroGlobal;
 	}
+
+	public String getCepString() {
+		return cepString;
+	}
+
+	public void setCepString(String cepString) {
+		this.cepString = cepString;
+	}
+	
 
 }
