@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<img width="50" height="40" src="imagens\voltar.jpg" />
+		<a href="servico.jsf">Cancelar</a>
+		<p:fieldset legend="Edição de Servico">
+			<p:tabView id="tbServico">
+				<p:tab title="Dados do Servico">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="descricao" value="Descricao:" />
+						<p:inputText id="nome" value="#{ServicoControl.servico.descricao}"
+							size="70" required="true"
+							requiredMessage="Descricao: Campo Obrigatório!" />
+						<p:outputLabel for="valor" value="Valor: " />
+						<p:inputText id="valor" value="#{ServicoControl.servico.valor}"
+							size="70" required="true"
+							requiredMessage="Valor: Campo Obrigatório!" />
+						<p:outputLabel for="remuneracao" value="Remuneração Tecnico: " />
+						<p:inputText id="remuneracao"
+							value="#{ServicoControl.servico.remuneracaoTecnico}" size="70"
+							required="true"
+							requiredMessage="Remuneração Tecnico: Campo Obrigatório!" />
+						<p:outputLabel for="diasRemuneradosTecnico" value="Dias Remunerados Técnico: " />
+						<p:inputText id="diasRemuneradosTecnico" value="#{ServicoControl.servico.qtdDiasRemuneracaoTecnico}"
+							size="70" required="true"
+							requiredMessage="Dias Remunerados Técnico: Campo Obrigatório!" />
+					</h:panelGrid>
+				</p:tab>
+			</p:tabView>
+			<p:commandButton value="Confirmar"
+				actionListener="#{ServicoControl.confirmar}" icon="ui-icon-check"
+				process="" title="Salvar Cliente" />
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
