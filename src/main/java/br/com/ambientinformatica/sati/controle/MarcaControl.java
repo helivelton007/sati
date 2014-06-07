@@ -30,11 +30,15 @@ public class MarcaControl {
 
 	@PostConstruct
 	public void init() {
+		
 		listar(null);
+		
 	}
 
 	public void confirmar(ActionEvent evt) {
+		
 		try {
+			
 			if (evt == null) {
 				FacesContext.getCurrentInstance().addMessage(
 						"Sati Tecnologia em Informática",
@@ -43,103 +47,159 @@ public class MarcaControl {
 			} else {
 				marcaDao.alterar(marca);
 				listar(evt);
-				// marca = new Marca();
+				
 				FacesContext.getCurrentInstance().getExternalContext()
 						.redirect("marca.jsf");
 			}
+			
 		} catch (Exception e) {
+			
 			UtilFaces.addMensagemFaces(e);
+			
 		}
+		
 	}
 
 	public void listar(ActionEvent evt) {
+		
 		try {
+			
 			marcas.clear();
 			Integer id = new Integer(filtroGlobal);
 			Marca a = marcaDao.consultar(id);
+			
 			if (a != null) {
 				marcas.add(a);
 			} else {
-				filtrarPorNome();
+				buscarPorNome();
 			}
+			
 		} catch (NumberFormatException e) {
-			filtrarPorNome();
+			
+			buscarPorNome();
+			
 		} catch (Exception e) {
+			
 			UtilFaces.addMensagemFaces(e);
+			
 		}
 	}
 
 	public void preparaAlterar(ActionEvent evt) {
+		
 		try {
+			
 			marca = (Marca) evt.getComponent().getAttributes().get("marca");
 			marca = marcaDao.consultar(marca.getId());
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("marcaDetalhes.jsf");
+			
 		} catch (Exception e) {
+			
 			UtilFaces.addMensagemFaces(e);
+			
+		}
+	}
+	
+	public void voltarParaPaginaAnteritor(){
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("marca.jsf");
+			
+		} catch (IOException e) {
+			
+			UtilFaces.addMensagemFaces(e);
+			
 		}
 	}
 
-	public void preparaIncluir(ActionEvent evt) {
+	public void novaOrdemServico(ActionEvent evt) {
+		
 		this.marca = new Marca();
+		
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("marcaDetalhes.jsf");
 		} catch (IOException e) {
 			UtilFaces.addMensagemFaces(e);
 		}
+		
 	}
 
 	public void excluir(ActionEvent evt) throws PersistenciaException {
+		
 		try {
+			
 			marca = (Marca) evt.getComponent().getAttributes().get("marca");
 			marca = marcaDao.consultar(marca.getId());
 			marcaDao.excluirPorId(marca.getId());
 			listar(evt);
+			
 			FacesContext.getCurrentInstance().addMessage(
 					"Reis Tecnologia em Informática",
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							"Operação realizada com sucesso", null));
+			
 		} catch (Exception e) {
+			
 			UtilFaces.addMensagemFaces(e);
+			
 		}
 	}
 
 	public void voltarHome(ActionEvent evt) {
+		
 		try {
+			
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("index.html");
+			
 		} catch (IOException e) {
+			
 			UtilFaces.addMensagemFaces(e);
+			
 		}
 	}
 
-	public void filtrarPorNome() {
+	public void buscarPorNome() {
+		
 		marcas = marcaDao.listarPorNome(filtroGlobal);
+		
 		if (marcas.isEmpty()) {
 			marcas = marcaDao.listarPorNome(filtroGlobal);
 		}
+		
 	}
 
 	public Marca getMarca() {
+		
 		return marca;
+		
 	}
 
 	public void setMarca(Marca marca) {
+		
 		this.marca = marca;
+		
 	}
 
 	public List<Marca> getMarcas() {
+		
 		return marcas;
-
+	
 	}
 
 	public String getFiltroGlobal() {
+		
 		return filtroGlobal;
+		
 	}
 
 	public void setFiltroGlobal(String filtroGlobal) {
+		
 		this.filtroGlobal = filtroGlobal;
+		
 	}
 
 }

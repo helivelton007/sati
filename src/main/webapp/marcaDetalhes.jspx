@@ -7,30 +7,13 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<img width="50" height="40" src="imagens\voltar.jpg" />
-		<a href="marca.jsf">Cancelar</a>
-		<p:dialog footer="Gtec Tecnologia" showEffect="slide"
-			hideEffect="bounce" visible="true">
-			<p:fieldset legend="Edição de Marca">
-				<!--Descrição-->
-				<p:tabView id="tbMarca">
-					<!-- 			DESCRIÇÃO -->
-					<p:tab title="Descrição">
-						<h:panelGrid columns="1">
-							<p:outputLabel for="nome" value="Nome: " />
-							<p:inputText id="nome" value="#{MarcaControl.marca.nome}"
-								size="70" required="true"
-								requiredMessage="Nome: Campo Obrigatório!" />
-						</h:panelGrid>
-					</p:tab>
-				</p:tabView>
-				<p:commandButton value="Confirmar"
-					actionListener="#{MarcaControl.confirmar}" icon="ui-icon-check"
-					process="" title="Salvar Marca" />
-				<p:commandButton value="Cancelar"
-					actionListener="#{MarcaControl.voltarMarca}" icon="ui-icon-check"
-					process="" title="Voltar" />
-			</p:fieldset>
-		</p:dialog>
+
+		<p:panel  header="Cadastro Marcas" id="panel">
+			<h:panelGrid columns="2">
+				<h:outputText value="Nome"></h:outputText>
+				<p:inputText value="#{MarcaControl.marca.nome }"></p:inputText>
+				<p:commandButton actionListener="#{MarcaControl.confirmar }" value="Confirmar" />
+			</h:panelGrid>
+		</p:panel>
 	</ui:define>
 </ui:composition>

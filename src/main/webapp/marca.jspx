@@ -7,44 +7,44 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:dataTable id="dtMarca" var="marca" value="#{MarcaControl.marcas}"
-			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
-			<f:facet name="header">
-						
-						<p:separator />
-				<p:outputLabel value="Descrição " />
-				<p:inputText id="inputFiltroGlobal"
-					value="#{MarcaControl.filtroGlobal}" />
-				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
-					actionListener="#{MarcaControl.listar}" update="dtMarca" />
-				<p:commandButton value="Nova Marca" title="Nova Marca"
-					actionListener="#{MarcaControl.preparaIncluir}" ajax="false" />
-				<p:commandButton value="Voltar" title="Voltar"
-					actionListener="#{MarcaControl.voltarHome}" ajax="false" />
+
+		<p:panel  header="Cadastro Marcas - Lista" id="panel">
+			<h:panelGrid columns="8">
+				<p:outputLabel value="Nome da Marca" />
+				<p:inputText id="inputFiltroGlobal" value="#{MarcaControl.filtroGlobal}"/>
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" actionListener="#{MarcaControl.listar}" update="marcas" />
 				<p:focus for="inputFiltroGlobal" />
 				<p:defaultCommand target="cmdFiltroGlobal" />
+				
+				<p:commandButton value="Nova Marca" title="Nova Marca"
+					actionListener="#{MarcaControl.novaOrdemServico}" ajax="false" />
+				<p:commandButton value="Voltar" title="Voltar"
+					actionListener="#{MarcaControl.voltarHome}" ajax="false" />
+			</h:panelGrid>			
+		</p:panel>
+		
+		<p:dataTable id="marcas" value="#{MarcaControl.marcas }" var="m"  width="70%" emptyMessage="Sem registros" >
+			<f:facet name="header">
+				<h:outputText value="Lista de Marcas"></h:outputText>
 			</f:facet>
-			<p:column headerText="Nome">
-				<h:outputText value="#{marca.nome}" />
-			</p:column>
-			<p:column headerText="Nome">
-				<h:outputText value="#{marca.modelo}" />
-			</p:column>
+			<p:column sortBy="#{m.nome }">
+				<f:facet name="header">
+					<h:outputText value="Nome"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{m.nome }"></h:outputText>
+			</p:column>	
 			<p:column headerText="Editar">
 				<p:commandButton icon="ui-icon-pencil" title="Alterar Marca"
-					actionListener="#{MarcaControl.preparaAlterar}" ajax="false">
-					<f:attribute name="marca" value="#{marca}" />
+					 ajax="false">
+					<f:attribute name="marca"  value ="editar" />
 				</p:commandButton>
 			</p:column>
 			<p:column headerText="Excluir">
 				<p:commandButton icon="ui-icon-closethick" title="Remover Marca"
-					actionListener="#{MarcaControl.excluir}" ajax="false">
-					<f:attribute name="marca" value="#{marca}" />
+					 ajax="false">
+					<f:attribute name="marca" value="excluir" />
 				</p:commandButton>
 			</p:column>
-			<f:facet name="footer">
-				<p:outputLabel value="# Registro(s)" />
-			</f:facet>
 		</p:dataTable>
 	</ui:define>
 </ui:composition>

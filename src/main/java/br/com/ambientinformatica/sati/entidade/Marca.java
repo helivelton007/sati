@@ -15,9 +15,6 @@ public class Marca {
 	private Integer id;
 	private String nome;
 	
-	@ManyToOne
-	private Modelo modelo;
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
