@@ -9,8 +9,6 @@
 	<ui:define name="corpo">
 		<img width="50" height="40" src="imagens\voltar.jpg" />
 		<a href="tecnico.jsf">Cancelar</a>
-		<p:dialog footer="Gtec Tecnologia" showEffect="slide"
-			hideEffect="bounce" visible="true">
 			<p:fieldset legend="Edição de Tecnico">
 				<!--DadosPessoais-->
 				<p:tabView id="tbTecnico">
@@ -45,6 +43,5 @@
 					actionListener="#{TecnicoControl.confirmar}" icon="ui-icon-check"
 					process="" title="Salvar Técnico" />
 			</p:fieldset>
-		</p:dialog>
 	</ui:define>
 </ui:composition>
