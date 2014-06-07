@@ -42,7 +42,6 @@ public class ServicoDaoJpa extends PersistenciaJpa<Servico> implements ServicoDa
 			throw new PersistenciaException(e.getMessage());
 		}
 	}
-
 	public Servico consultarPorDescricao(String descricao) throws SatiException {
 		String sql = "select e from Servico e where upper(e.descricao) = upper(:descricao)";
 		Query query = em.createQuery(sql);
@@ -53,5 +52,16 @@ public class ServicoDaoJpa extends PersistenciaJpa<Servico> implements ServicoDa
 			return null;
 		}
 	}
+	public List<Servico> listarPorNome(String nome) throws SatiException, PersistenciaException {
+		try{
+			String sql = "select distinct c from Servico c where upper(c.nome) like upper(:nome)";
+			Query query = em.createQuery(sql);
+			query.setParameter("nome", "%" + nome + "%");
+			return query.getResultList();
+		}catch(Exception e){
+			UtilLog.getLog().error(e.getMessage(), e);
+			throw new PersistenciaException(e.getMessage());
+		}
+}
 
 }
