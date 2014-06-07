@@ -7,8 +7,8 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<img width="50" height="40" src="imagens\voltar.jpg" />
-		<a href="contato.jsf">Cancelar</a>
+		<img width="40" height="40" src="imagens\voltar.jpg" />
+		<a href="contato.jsf">Voltar</a>
 		<p:dialog footer="SATI Tecnologia" showEffect="slide"
 			hideEffect="bounce" visible="true">
 			<p:fieldset legend="Edição de Contato">
