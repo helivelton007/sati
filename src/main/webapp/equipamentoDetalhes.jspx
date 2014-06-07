@@ -7,8 +7,8 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-	<img width="50" height="40" src="imagens\voltar.jpg" />
-		<a href="equipamento.jsf">Cancelar</a>
+	<img width="40" height="40" src="imagens\voltar.jpg" />
+		<a href="equipamento.jsf">Voltar</a>
 		<p:dialog footer="Gtec Tecnologia" showEffect="slide"  hideEffect="bounce" visible="true">
 		<p:fieldset legend="Edição de Equipamento">
 			<!--Descrição-->
