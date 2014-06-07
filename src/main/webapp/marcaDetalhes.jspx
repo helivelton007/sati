@@ -9,8 +9,6 @@
 	<ui:define name="corpo">
 		<img width="50" height="40" src="imagens\voltar.jpg" />
 		<a href="marca.jsf">Cancelar</a>
-		<p:dialog footer="Gtec Tecnologia" showEffect="slide"
-			hideEffect="bounce" visible="true">
 			<p:fieldset legend="Edição de Marca">
 				<!--Descrição-->
 				<p:tabView id="tbMarca">
@@ -31,6 +29,5 @@
 					actionListener="#{MarcaControl.voltarMarca}" icon="ui-icon-check"
 					process="" title="Voltar" />
 			</p:fieldset>
-		</p:dialog>
 	</ui:define>
 </ui:composition>
