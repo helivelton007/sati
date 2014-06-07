@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.Persistencia;
-import br.com.ambientinformatica.sati.entidade.Cliente;
 import br.com.ambientinformatica.sati.entidade.Servico;
 import br.com.ambientinformatica.sati.util.SatiException;
 
@@ -14,5 +13,5 @@ public interface ServicoDao extends Persistencia<Servico>{
 
 	public Servico consultarPorDescricao( String descricao) throws SatiException;
 	
-	List<Servico> listarPorNome(String nome) throws SatiException, PersistenciaException;
+	List<Servico> listarPorDescricao(String descricao) throws SatiException, PersistenciaException;
 }

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
-import br.com.ambientinformatica.sati.entidade.Cliente;
 import br.com.ambientinformatica.sati.entidade.Servico;
 import br.com.ambientinformatica.sati.persistencia.ServicoDao;
 import br.com.ambientinformatica.sati.util.SatiException;
@@ -109,7 +108,7 @@ public class ServicoControl {
 	
 	public void filtrarPorNome() {
 		try {
-			servicos = servicoDao.listarPorNome(filtroGlobal);
+			servicos = servicoDao.listarPorDescricao(filtroGlobal);
 		} catch (SatiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,7 +118,7 @@ public class ServicoControl {
 		}
 		if (servicos.isEmpty()) {
 			try {
-				servicos = clienteDao.listarPorNome(filtroGlobal);
+				servicos = servicoDao.listarPorDescricao(filtroGlobal);
 			} catch (SatiException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -130,16 +129,16 @@ public class ServicoControl {
 		}
 	}
 	
-	public Cliente getCliente() {
-		return cliente;
+	public Servico getCliente() {
+		return servico;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 	
-	public List<Cliente> getClientes() {
-		return clientes;
+	public List<Servico> getServicos() {
+		return servicos;
 	}
 
 	public String getFiltroGlobal() {
