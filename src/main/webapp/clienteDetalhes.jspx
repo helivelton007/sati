@@ -19,6 +19,14 @@
 						<p:inputText id="nome" value="#{ClienteControl.cliente.nome}"
 							size="70" required="true"
 							requiredMessage="Nome: Campo Obrigatório!" />
+							<p:inputText id="nome" value="#{ClienteControl.cliente.razaoSocial}"
+							size="70" required="true"
+							requiredMessage="Nome: Campo Obrigatório!" />
+							<p:outputLabel for="CPF/CNPJ" value="CPF/CNPJ: " />
+						<p:inputMask id="cpf/cnpj"
+							value="#{ClienteControl.cliente.telefone}" mask="(99)9999-9999"
+							required="true"
+							requiredMessage="Telefone Residencial: Campo Obrigatório" />
 						<p:outputLabel for="telefone" value="Telefone Residencial: " />
 						<p:inputMask id="telefone"
 							value="#{ClienteControl.cliente.telefone}" mask="(99)9999-9999"

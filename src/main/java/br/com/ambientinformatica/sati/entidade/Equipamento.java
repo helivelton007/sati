@@ -1,5 +1,7 @@
 package br.com.ambientinformatica.sati.entidade;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,7 @@ public class Equipamento {
 	@SequenceGenerator(name = "equipamento_seq", sequenceName = "equipamento_seq", allocationSize = 1, initialValue = 1)
 	private Integer id;
 	private String nome;
+	private BigDecimal valor;
 	
 	@OneToOne
 	private Marca marca;
@@ -72,6 +75,15 @@ public class Equipamento {
 	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
-	
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+
 
 }

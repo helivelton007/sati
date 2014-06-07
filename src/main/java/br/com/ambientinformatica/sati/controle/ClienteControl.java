@@ -17,7 +17,7 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.corporativo.entidade.Cep;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.sati.entidade.Cliente;
-import br.com.ambientinformatica.sati.persistencia.CepDao;
+import br.com.ambientinformatica.sati.entidade.Endereco;
 import br.com.ambientinformatica.sati.persistencia.ClienteDao;
 import br.com.ambientinformatica.sati.util.SatiException;
 
@@ -131,15 +131,12 @@ public class ClienteControl {
 		}
 	}
 	public void consultarCep(ActionEvent evento) throws Exception {
-		CepDao cepDao = new CepDao();
-		Cep cep = new Cep();
+		Endereco cep= new Endereco();
 		try {
-			cep = cepDao.consultar(cepString);
-			cliente.setCep(cep);
+			cep.getId();
+			
 		}catch(NullPointerException npe){
-			cep = new Cep();
-		} catch (IOException e) {
-			UtilFaces.addMensagemFaces(e);
+			
 		}
 	}
 	
