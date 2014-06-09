@@ -37,6 +37,13 @@ public class Cliente {
 	private String nome;
 
 	private String razaoSocial;
+	
+	@ManyToOne
+	private Cep cep;
+
+	public void setCep(Cep cep) {
+		this.cep = cep;
+	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "cod_cliente")

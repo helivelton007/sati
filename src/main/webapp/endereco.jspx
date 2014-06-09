@@ -7,37 +7,37 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:dataTable id="dtCliente" var="cliente"
-			value="#{ClienteControl.clientes}"
+		<p:dataTable id="dtEndereco" var="endereco"
+			value="#{EnderecoControl.enderecos}"
 			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
 			<f:facet name="header">
-						Cadastro de Clientes
+						Cadastro de Endereços
 						<p:separator />
-				<p:outputLabel value="Nome: " />
+				<p:outputLabel value="Cep: " />
 				<p:inputText id="inputFiltroGlobal"
-					value="#{ClienteControl.filtroGlobal}" />
+					value="#{EnderecoControl.filtroGlobal}" />
 				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
-					actionListener="#{ClienteControl.listar}" update="dtCliente" />
+					actionListener="#{EnderecoControl.listar}" update="dtEndereco" />
 				<p:commandButton value="Novo CLiente" title="Novo Cliente"
-					actionListener="#{ClienteControl.preparaIncluir}" ajax="false" />
+					actionListener="#{EnderecoControl.preparaIncluir}" ajax="false" />
 				<p:commandButton value="Voltar" title="Voltar"
-					actionListener="#{ClienteControl.voltarHome}" ajax="false" />
+					actionListener="#{EnderecoControl.voltarHome}" ajax="false" />
 				<p:focus for="inputFiltroGlobal" />
 				<p:defaultCommand target="cmdFiltroGlobal" />
 			</f:facet>
-			<p:column headerText="Nome">
-				<h:outputText value="#{cliente.nome}" />
+			<p:column headerText="Cep">
+				<h:outputText value="#{endereco.Cep}" />
 			</p:column>
 			<p:column headerText="Editar">
-				<p:commandButton icon="ui-icon-pencil" title="Alterar Cliente"
-					actionListener="#{ClienteControl.preparaAlterar}" ajax="false">
-					<f:attribute name="cliente" value="#{cliente}" />
+				<p:commandButton icon="ui-icon-pencil" title="Alterar Endereço"
+					actionListener="#{EnderecoControl.preparaAlterar}" ajax="false">
+					<f:attribute name="endereco" value="#{endereco}" />
 				</p:commandButton>
 			</p:column>
 			<p:column headerText="Excluir">
-				<p:commandButton icon="ui-icon-closethick" title="Remover Cliente"
-					actionListener="#{ClienteControl.excluir}" ajax="false">
-					<f:attribute name="cliente" value="#{cliente}" />
+				<p:commandButton icon="ui-icon-closethick" title="Remover Endereço"
+					actionListener="#{EnderecoControl.excluir}" ajax="false">
+					<f:attribute name="endereco" value="#{endereco}" />
 				</p:commandButton>
 			</p:column>
 			<f:facet name="footer">

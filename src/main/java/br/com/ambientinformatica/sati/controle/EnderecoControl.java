@@ -14,26 +14,22 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.corporativo.entidade.Cep;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
-import br.com.ambientinformatica.sati.entidade.Cliente;
-import br.com.ambientinformatica.sati.persistencia.CepDao;
-import br.com.ambientinformatica.sati.persistencia.ClienteDao;
+import br.com.ambientinformatica.sati.entidade.Endereco;
+import br.com.ambientinformatica.sati.persistencia.EnderecoDao;
 import br.com.ambientinformatica.sati.util.SatiException;
 
-@Controller("ClienteControl")
+@Controller("EnderecoControl")
 @Scope("conversation")
-public class ClienteControl {
+public class EnderecoControl {
 
-	private Cliente cliente = new Cliente();
-	private Cep cep = new Cep();
+	private Endereco endereco = new Endereco();
+	
 	
 	@Autowired
-	private ClienteDao clienteDao;
-	private CepDao cepDao;
+	private EnderecoDao enderecoDao;
 	private String filtroGlobal = "";
-	private List<Cliente> clientes = new ArrayList<Cliente>();
-	private String cepString;
+	private List<Endereco> enderecos = new ArrayList<Endereco>();
 
    @PostConstruct
    public void init(){
@@ -42,22 +38,22 @@ public class ClienteControl {
    
 	public void confirmar(ActionEvent evt){
 		try {
-			clienteDao.alterar(cliente);
+			enderecoDao.alterar(endereco);
          listar(evt);
-         cliente = new Cliente();
+         endereco = new Endereco();
          FacesContext.getCurrentInstance().getExternalContext()
-			.redirect("cliente.jsf");
+			.redirect("endereco.jsf");
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
 	}
 		public void listar(ActionEvent evt) {
 			try {
-				clientes.clear();
+				enderecos.clear();
 				Integer id = new Integer(filtroGlobal);
-				Cliente a = clienteDao.consultar(id);
+				Endereco a = enderecoDao.consultar(id);
 				if (a != null) {
-					clientes.add(a);
+					enderecos.add(a);
 				} else {
 					filtrarPorNome();
 				}
@@ -68,29 +64,29 @@ public class ClienteControl {
 			}
 	}
 	public void preparaIncluir(ActionEvent evt) {
-		this.cliente = new Cliente();
+		this.endereco = new Endereco();
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("clienteDetalhes.jsf");
+					.redirect("enderecoDetalhes.jsf");
 		} catch (IOException e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 	public void preparaAlterar(ActionEvent evt) {
 		try {
-			cliente = (Cliente) evt.getComponent().getAttributes().get("cliente");
-			cliente = clienteDao.consultar(cliente.getId());
+			endereco = (Endereco) evt.getComponent().getAttributes().get("endereco");
+			endereco = enderecoDao.consultar(endereco.getId());
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("clienteDetalhes.jsf");
+					.redirect("enderecoDetalhes.jsf");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 	public void excluir(ActionEvent evt) throws PersistenciaException {
 		try {
-			cliente = (Cliente) evt.getComponent().getAttributes().get("cliente");
-			cliente = clienteDao.consultar(cliente.getId());
-			clienteDao.excluirPorId(cliente.getId());
+			endereco = (Endereco) evt.getComponent().getAttributes().get("endereco");
+			endereco = enderecoDao.consultar(endereco.getId());
+			enderecoDao.excluirPorId(endereco.getId());
 			listar(evt);
 			FacesContext.getCurrentInstance().addMessage(
 					"",
@@ -111,7 +107,7 @@ public class ClienteControl {
 	
 	public void filtrarPorNome() {
 		try {
-			clientes = clienteDao.listarPorNome(filtroGlobal);
+			enderecos = enderecoDao.listarPorCep(filtroGlobal);
 		} catch (SatiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,9 +115,9 @@ public class ClienteControl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (clientes.isEmpty()) {
+		if (enderecos.isEmpty()) {
 			try {
-				clientes = clienteDao.listarPorNome(filtroGlobal);
+				enderecos = enderecoDao.listarPorCep(filtroGlobal);
 			} catch (SatiException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -131,28 +127,17 @@ public class ClienteControl {
 			}
 		}
 	}
-	public void consultarCep(ActionEvent evt) throws Exception {
-		cep = (Cep) evt.getComponent().getAttributes().get("cep");
-		try {
-			cep = cepDao.consultar(cepString);
-			cliente.setCep(cep);
-		}catch(NullPointerException npe){
-			cep = new Cep();
-		} catch (PersistenciaException e) {
-			UtilFaces.addMensagemFaces(e.getMessage());
-		}
-	}
-	
-	public Cliente getCliente() {
-		return cliente;
+
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
-	public List<Cliente> getClientes() {
-		return clientes;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
 	public String getFiltroGlobal() {
@@ -163,13 +148,5 @@ public class ClienteControl {
 		this.filtroGlobal = filtroGlobal;
 	}
 
-	public String getCepString() {
-		return cepString;
-	}
-
-	public void setCepString(String cepString) {
-		this.cepString = cepString;
-	}
-	
 
 }

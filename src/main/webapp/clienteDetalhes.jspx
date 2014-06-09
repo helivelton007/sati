@@ -19,39 +19,26 @@
 						<p:inputText id="nome" value="#{ClienteControl.cliente.nome}"
 							size="70" required="true"
 							requiredMessage="Nome: Campo Obrigatório!" />
-							<p:inputText id="nome" value="#{ClienteControl.cliente.razaoSocial}"
-							size="70" required="true"
-							requiredMessage="Nome: Campo Obrigatório!" />
-							<p:outputLabel for="CPF/CNPJ" value="CPF/CNPJ: " />
-						<p:inputMask id="cpf/cnpj"
-							value="#{ClienteControl.cliente.telefone}" mask="(99)9999-9999"
-							required="true"
-							requiredMessage="Telefone Residencial: Campo Obrigatório" />
-						<p:outputLabel for="telefone" value="Telefone Residencial: " />
-						<p:inputMask id="telefone"
-							value="#{ClienteControl.cliente.telefone}" mask="(99)9999-9999"
-							required="true"
-							requiredMessage="Telefone Residencial: Campo Obrigatório" />
-						<p:outputLabel for="celular" value="Telefone Celular: *" />
-						<p:inputMask id="celular"
-							value="#{ClienteControl.cliente.celular}" mask="(99)9999-9999"
-							required="true"
-							requiredMessage="Telefone Celular: Campo Obrigatório!" />
-						<p:outputLabel for="email" value="Email: *" />
-						<p:inputText id="email" value="#{ClienteControl.cliente.email}"
-							size="70" required="true"
-							requiredMessage="Email: Campo Obrigatório!" />
-						<h:outputText for="endereco" value="Endereco " />
-						<p:inputText id="endereco"
-							value="#{ClienteControl.cliente.endereco}" size="40"
-							required="true" requiredMessage="Endereco Campo Obrigatório!" />
-						<h:outputText for="bairro" value="Bairro: " />
-						<p:inputText id="bairro" value="#{ClienteControl.cliente.bairro}"
-							required="true" requiredMessage="Bairro: Campo Obrigatório!" />
-						<h:outputText for="cidade" value="Cidade " />
-						<p:inputText id="cidade"
-							value="#{ClienteControl.cliente.cidade}" size="40"
-							required="true" requiredMessage="Cidade: Campo Obrigatório!" />
+						<p:inputText id="nome"
+							value="#{ClienteControl.cliente.razaoSocial}" size="70"
+							required="true" requiredMessage="Nome: Campo Obrigatório!" />
+						<p:outputLabel for="cpfCnpj" value="CPF/CNPJ: *" />
+						<p:inputText id="cpfCnpj"
+							value="#{ClienteControl.cliente.cpfCnpj}" size="70"
+							required="true" requiredMessage="Email: Campo Obrigatório!" />
+						<h:outputText value="cpfCnpj: " />
+						<h:panelGroup>
+							<h:inputText value="#{ClienteControl.cepString}" />
+							<h:commandButton actionListener="#{ClienteControl.consultarCep}"
+								value="Consultar" />
+						</h:panelGroup>
+						<h:outputText value="Logradouro" />
+						<h:outputText value="#{ClienteControl.cliente.cep.logradouro}" />
+						<h:outputText value="Bairro" />
+						<h:outputText value="#{ClienteControl.cliente.cep.bairro}" />
+						<h:outputText value="Municipio" />
+						<h:outputText
+							value="#{ClienteControl.cliente.cep.municipio.descricao}" />
 					</h:panelGrid>
 				</p:tab>
 			</p:tabView>

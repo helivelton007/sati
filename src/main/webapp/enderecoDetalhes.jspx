@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<img width="40" height="40" src="imagens\voltar.jpg" />
+		<a href="endereco.jsf">Voltar</a>
+		<p:fieldset legend="Edição de Endereços">
+			<!--Dados-->
+			<p:tabView id="tbEndereco">
+				<!-- 			DADOS DE ENDEREÇO -->
+				<p:tab title="Dados">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="Cep" value="Cep:" />
+						<p:inputText id="Cep" value="#{EnderecoControl.endereco.cep}"
+							size="70" required="true"
+							requiredMessage="Cep: Campo Obrigatório!" />
+							<p:inputText id="Logradouro" value="#{EnderecoControl.endereco.logradouro}"
+							size="70" required="true"
+							requiredMessage="Logradouro: Campo Obrigatório!" />
+						<h:outputText for="cep" value="CEP: " />
+						<p:inputText id="cep"
+							value="#{ClienteControl.cliente.cep}" size="40"
+							required="true" requiredMessage="CEP Campo Obrigatório!" />
+						<h:outputText for="bairro" value="Bairro: " />
+						<p:inputText id="bairro" value="#{ClienteControl.cliente.bairro}"
+							required="true" requiredMessage="Bairro: Campo Obrigatório!" />
+						<h:outputText for="cidade" value="Cidade " />
+						<p:inputText id="cidade"
+							value="#{ClienteControl.cliente.cidade}" size="40"
+							required="true" requiredMessage="Cidade: Campo Obrigatório!" />
+					</h:panelGrid>
+				</p:tab>
+			</p:tabView>
+			<p:commandButton value="Confirmar"
+				actionListener="#{ClienteControl.confirmar}" icon="ui-icon-check"
+				process="" title="Salvar Cliente" />
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
