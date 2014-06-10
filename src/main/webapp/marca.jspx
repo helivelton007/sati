@@ -35,14 +35,14 @@
 			</p:column>	
 			<p:column headerText="Editar">
 				<p:commandButton icon="ui-icon-pencil" title="Alterar Marca"
-					 ajax="false">
-					<f:attribute name="marca"  value ="editar" />
+					actionListener="#{MarcaControl.preparaAlterar}" ajax="false">
+					<f:attribute name="marca"  value ="#{marca}" />
 				</p:commandButton>
 			</p:column>
 			<p:column headerText="Excluir">
 				<p:commandButton icon="ui-icon-closethick" title="Remover Marca"
-					 ajax="false">
-					<f:attribute name="marca" value="excluir" />
+					 actionListener="#{MarcaControl.excluir}" ajax="false">
+					<f:attribute name="marca" value="#{marca}" />
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
