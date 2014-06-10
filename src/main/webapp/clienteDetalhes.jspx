@@ -7,8 +7,8 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<img width="50" height="40" src="imagens\voltar.jpg" />
-		<a href="cliente.jsf">Cancelar</a>
+		<img width="40" height="40" src="imagens\voltar.jpg" />
+		<a href="cliente.jsf">Voltar</a>
 		<p:fieldset legend="Edição de Cliente">
 			<!--DadosPessoais-->
 			<p:tabView id="tbCliente">
@@ -19,14 +19,15 @@
 						<p:inputText id="nome" value="#{ClienteControl.cliente.nome}"
 							size="70" required="true"
 							requiredMessage="Nome: Campo Obrigatório!" />
-						<p:inputText id="nome"
+						<p:outputLabel for="razaoSocial" value="Razao Social: " />
+						<p:inputText id="razaoSocial"
 							value="#{ClienteControl.cliente.razaoSocial}" size="70"
 							required="true" requiredMessage="Nome: Campo Obrigatório!" />
 						<p:outputLabel for="cpfCnpj" value="CPF/CNPJ: *" />
-						<p:inputText id="cpfCnpj"
-							value="#{ClienteControl.cliente.cpfCnpj}" size="70"
-							required="true" requiredMessage="Email: Campo Obrigatório!" />
-						<h:outputText value="cpfCnpj: " />
+						<p:inputMask id="cpfCnpj"
+							value="#{ClienteControl.cliente.cpfCnpj}" 
+							required="true" requiredMessage="CPF/CNPJ: Campo Obrigatório!" />
+						<h:outputText value="CEP: " />
 						<h:panelGroup>
 							<h:inputText value="#{ClienteControl.cepString}" />
 							<h:commandButton actionListener="#{ClienteControl.consultarCep}"

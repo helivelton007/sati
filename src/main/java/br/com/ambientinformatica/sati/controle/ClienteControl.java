@@ -8,14 +8,15 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.corporativo.entidade.Cep;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
+import br.com.ambientinformatica.sati.entidade.CepNovo;
 import br.com.ambientinformatica.sati.entidade.Cliente;
 import br.com.ambientinformatica.sati.persistencia.CepDao;
 import br.com.ambientinformatica.sati.persistencia.ClienteDao;
@@ -26,7 +27,7 @@ import br.com.ambientinformatica.sati.util.SatiException;
 public class ClienteControl {
 
 	private Cliente cliente = new Cliente();
-	private Cep cep = new Cep();
+	private CepNovo cep = new CepNovo();
 	
 	@Autowired
 	private ClienteDao clienteDao;
@@ -132,12 +133,15 @@ public class ClienteControl {
 		}
 	}
 	public void consultarCep(ActionEvent evt) throws Exception {
-		cep = (Cep) evt.getComponent().getAttributes().get("cep");
+		CepDao cepDao = new CepDao();
+		CepNovo cep = new CepNovo();
 		try {
 			cep = cepDao.consultar(cepString);
+			System.out.println("CEP"+ cep);
 			cliente.setCep(cep);
+			
 		}catch(NullPointerException npe){
-			cep = new Cep();
+			cep = new CepNovo();
 		} catch (PersistenciaException e) {
 			UtilFaces.addMensagemFaces(e.getMessage());
 		}

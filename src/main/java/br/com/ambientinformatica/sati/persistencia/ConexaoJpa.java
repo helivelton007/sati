@@ -10,7 +10,7 @@ public class ConexaoJpa {
 
 	private static EntityManagerFactory criarEntityManagerFactory() {
 		if (emf == null) {
-			emf = Persistence.createEntityManagerFactory("primefaces");
+			emf = Persistence.createEntityManagerFactory("sati");
 		}
 		return emf;
 	}

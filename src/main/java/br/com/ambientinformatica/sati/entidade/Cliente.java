@@ -39,9 +39,14 @@ public class Cliente {
 	private String razaoSocial;
 	
 	@ManyToOne
-	private Cep cep;
+	private CepNovo cep;
+	
 
-	public void setCep(Cep cep) {
+	public CepNovo getCep() {
+		return cep;
+	}
+
+	public void setCep(CepNovo cep) {
 		this.cep = cep;
 	}
 
@@ -105,14 +110,14 @@ public class Cliente {
 		}
 	}
 
-	@Transient
-	public String getCep() {
-		if (getEnderecoAtivo() != null) {
-			return getEnderecoAtivo().getCep();
-		} else {
-			return "";
-		}
-	}
+//	@Transient
+//	public String getCep() {
+//		if (getEnderecoAtivo() != null) {
+//			return getEnderecoAtivo().getCep();
+//		} else {
+//			return "";
+//		}
+//	}
 
 	@Transient
 	public String getEnderecoTexto() {
